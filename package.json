@@ -8,14 +8,14 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "antd": "^4.2.4",
     "classnames": "^2.2.6",
     "dva": "^2.6.0-beta.6",
     "dva-model": "^2.4.1",
     "particles.js": "^2.0.0",
     "qs": "^6.9.4",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "antd": "^4.2.4"
   },
   "devDependencies": {
     "@types/jest": "^23.3.12",
@@ -35,6 +35,12 @@
     "umi": "^2.9.0",
     "umi-plugin-react": "^1.15.8",
     "umi-types": "^0.3.0"
+  },
+  "create-bugu": {
+    "ignore": [
+      ".git",
+      "create-umi"
+    ]
   },
   "lint-staged": {
     "*.{ts,tsx}": [
