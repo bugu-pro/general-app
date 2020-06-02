@@ -35,6 +35,12 @@
     "umi-plugin-react": "^1.15.8",
     "umi-types": "^0.3.0"
   },
+  "create-bugu": {
+    "ignore": [
+      ".git",
+      "create-umi"
+    ]
+  },
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --fix",
