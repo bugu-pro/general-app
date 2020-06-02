@@ -9,10 +9,8 @@ const config: IConfig =  {
       antd: true,
       dva: true,
       dynamicImport: { webpackChunkName: true },
-      title: 'bugu',
+      title: 'bugu-management',
       dll: true,
-      hd: true,
-      fastClick: true,
 
       routes: {
         exclude: [
@@ -28,10 +26,6 @@ const config: IConfig =  {
     }],
   ],
   hash: true,
-  targets: {
-    ios: '8.4',
-    android: '4.2',
-  },
   // proxy: {
   //   '/api/hii/*': {
   //     'target': 'http://smart-campus-mp-test.yunzhiyuan100.com.cn/',
