@@ -1,0 +1,96 @@
+@primary-background: #0088ff linear-gradient(left, #00aaff, #0088ff);
+@small-background: #ff8800 linear-gradient(left, #ffaa00, #ff8800);
+@picker-background-img: url('http://res.yunzhiyuan100.com/o_1cs61fk1e1f9o6g8jb15g51f3pj.jpg');
+
+.page {
+  min-height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  & > header {
+    flex-shrink: 0;
+    background-color: #fff;
+    //transition: filter 0.3s;
+    z-index: 1;
+    & > h1 {
+      font-size: 60px;
+    }
+  }
+  & > main {
+    flex: 1;
+    transition: filter 0.5s;
+    position: relative;
+    z-index: 0;
+  }
+  & > footer {
+    flex-shrink: 0;
+    //transition: filter 0.3s;
+    :global {
+      .am-button {
+        border-radius: 0;
+        &.am-button-primary {
+          background: @primary-background;
+        }
+      }
+    }
+  }
+  & > .loading {
+    position: fixed;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    margin: -100px 0 0 -100px;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    &:after {
+      content: '努力加载中...';
+      margin-top: 30px;
+      color: #fff;
+      font-size: 24px;
+    }
+  }
+  &.page-footer-fixed {
+    & > footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+    & > main {
+      padding-bottom: 88px;
+    }
+  }
+  &.page-main-fixed {
+    height: 100%;
+    & > main {
+      overflow: auto;
+    }
+  }
+  &.page-header-fixed {
+    & > header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+  &.page-loading {
+    & > main {
+      filter: blur(5px);
+      pointer-events: none;
+    }
+  }
+}
+
+.student-origin-step-page {
+  & > main {
+    padding-top: 188px;
+  }
+}
