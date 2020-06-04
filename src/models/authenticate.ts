@@ -1,5 +1,5 @@
 import Model from 'dva-model';
-import { Authenticate as namespace } from '../../utils/namespace';
+import { Authenticate as namespace } from '../utils/namespace';
 // import authenticateCache from '../caches/authenticate';
 
 export default Model({
