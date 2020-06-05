@@ -8,15 +8,11 @@ import {router} from 'umi';
 import moment from 'moment';
 
 
-export default connect(state => ({
-  menuTree: state[Authenticate].menuTree,
-  profile: state[Authenticate].authenticate || {},
-  loading: state.loading.global,
-})(function Home({loading, dispatch, profile, menuTree}) {
+function Home({loading, dispatch, profile, menuTree}) {
 
   const breadcrumb = ['首页'];
 
-  const {schoolCampusName = '数据加载中...'} = profile || {};
+  const {schoolCampusName = '欢迎来到布谷后台管理系统'} = profile || {};
 
   const title = schoolCampusName;
   const headerOperation = <Page.Header.Operation dispatch={dispatch} />;
@@ -65,5 +61,10 @@ export default connect(state => ({
     </Page>
 
   );
-}));
+};
 
+export default connect(state => ({
+  menuTree: state[Authenticate].menuTree,
+  profile: state[Authenticate].authenticate || {},
+  loading: state.loading.global,
+}))(Home)

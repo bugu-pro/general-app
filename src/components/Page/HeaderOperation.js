@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
-import { Button, Icon, Popconfirm, Popover, Tooltip, Modal, Cascader } from 'antd';
+// import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Button, Popconfirm, Popover, Tooltip, Modal, Cascader } from 'antd';
 import { Authenticate } from '../../utils/namespace';
 import { router, Link } from 'umi';
 import './index.less';
@@ -173,7 +174,7 @@ class HeaderOperation extends Component {
                 <a href="/" onClick={() => {
                   let selectedSchoolCampusIds;
                   const selectModal = Modal.confirm({
-                    icon: null,
+                    // icon: <LegacyIcon type={null} />,
                     title: `切换${(schoolCampusList && schoolCampusList.length > 1) ? '学校' : '校区'}`,
                     content: (
                       <div style={{ padding: '10px 0' }}>
@@ -245,7 +246,7 @@ class HeaderOperation extends Component {
           userOperations ?
             <Popover placement="leftTop" title={`用户：${profile.nick || profile.username}`} content={userOperations}>
               <Button type="ghost" shape="circle" style={{ marginLeft: '1em', border: 'none' }}>
-                <Icon type={'user'} style={{ fontSize: '32px', color: '#0088ff' }}/>
+                {/* <LegacyIcon type={'user'} style={{ fontSize: '32px', color: '#0088ff' }}/> */}
               </Button>
             </Popover>
             :

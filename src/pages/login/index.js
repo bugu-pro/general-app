@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {connect} from 'dva';
 import {router} from 'umi';
-import {Form, Input, Spin, Button, Checkbox} from 'antd';
+import { Input, Spin, Button, Checkbox, Form } from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {Authenticate as namespace, } from '../../utils/namespace';
 import Particles from '../../components/Particles';

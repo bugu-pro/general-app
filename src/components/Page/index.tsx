@@ -1,5 +1,7 @@
 import React, {Component, FunctionComponent} from 'react';
-import {Breadcrumb, Icon, Spin, Menu, Modal} from 'antd';
+import { HeartOutlined } from '@ant-design/icons';
+// import { Icon as LegacyIcon } from '@ant-design/compatible';
+import { Breadcrumb, Spin, Menu, Modal } from 'antd';
 import {ModalFuncProps} from 'antd/lib/Modal';
 import classNames from 'classnames';
 import Operation from './HeaderOperation';
@@ -96,7 +98,7 @@ export class PageHeader extends Component<PageHeaderProps>  {
         <div className={prefixCls + '-header-title'}>
           <h1 title={title}>{title}</h1>
           <Flex style={{alignItems: 'center'}}>
-            <Icon type="heart"/>
+            <HeartOutlined />
             <Breadcrumb>{renderBreadcrumb(breadcrumb)}</Breadcrumb>
           </Flex>
         </div>
@@ -143,7 +145,7 @@ const renderMenu = (data: PageHeaderPropsMenuItemProps[], map: any) =>
           disabled={menu.disabled}
           title={
             <span>
-              {menu.icon ? <Icon type={menu.icon}/> : null}
+              {/* {menu.icon ? <LegacyIcon type={menu.icon}/> : null} */}
               {menu.title || menu.children || menu.key}
             </span>
           }
@@ -157,7 +159,7 @@ const renderMenu = (data: PageHeaderPropsMenuItemProps[], map: any) =>
           //@ts-ignore
           title={
             <span>
-              {menu.icon ? <Icon type={menu.icon}/> : null}
+              {/* {menu.icon ? <LegacyIcon type={menu.icon}/> : null} */}
               {menu.title || menu.children || menu.key}
             </span>
           }
@@ -170,7 +172,7 @@ const renderMenu = (data: PageHeaderPropsMenuItemProps[], map: any) =>
     } else {
       return (
         <Menu.Item key={menu.key} disabled={menu.disabled}>
-          {menu.icon ? <Icon type={menu.icon}/> : null}
+          {/* {menu.icon ? <LegacyIcon type={menu.icon}/> : null} */}
           {menu.title || menu.children || menu.key}
         </Menu.Item>
       );

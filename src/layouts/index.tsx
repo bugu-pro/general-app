@@ -1,7 +1,8 @@
 import React, { Component, Fragment, useState, useEffect } from 'react';
 import { withRouter, Link, router } from 'umi';
 import { connect } from 'dva';
-import { Icon, Spin, Menu, Popover, ConfigProvider } from 'antd';
+import { BarsOutlined } from '@ant-design/icons';
+import { Spin, Menu, Popover, ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import classNames from 'classnames';
 import Flex from '../components/Flex';
@@ -14,16 +15,8 @@ import { Redirect } from 'react-router';
 const ICON_MAP = {
   '管理': styles['icon-guanli'],
   '管理员': styles['icon-admin'],
-  '排课': styles['icon-paike'],
-  '考务管理': styles['icon-kaowu'],
-  '选班排课': styles['icon-fenban'],
   '考勤': styles['icon-kaoqin'],
-  '文印管理': styles['icon-wenyin'],
-  '阅卷管理': styles['icon-yuejuan'],
-  '题库试卷': styles['icon-question'],
   '基础配置': styles['icon-config'],
-  '智能排课': styles['icon-fenban'],
-  '疫情防控管理': styles['icon-fenban'],
 };
 
 
@@ -56,7 +49,7 @@ function Bars({ onChange, isMin }) {
     <a className={styles['menu-handle']} onClick={() => {
       onChange(!isMin);
     }}>
-      <Icon type="bars"/>
+      <BarsOutlined />
     </a>
   );
 }
@@ -205,7 +198,7 @@ function BaseLayout({ location, children, ...props }) {
 
 const PrivateRoute = ({ children, location, profile }) => {
   return (
-    !profile || profile.token ?
+    profile && profile.token ?
       children
       :
       <Redirect
@@ -234,14 +227,6 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, info) {
     this.setState({ error, info });
-    // 将component中的报错发送到Fundebug
-    if (window.location.protocol === 'https:' && window.fundebug) {
-      window.fundebug.notifyError(error, {
-        metaData: {
-          info: info,
-        },
-      });
-    }
   }
 
   render() {
