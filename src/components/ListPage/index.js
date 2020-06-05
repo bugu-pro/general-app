@@ -1,7 +1,6 @@
-import React, { Component, Fragment, createRef } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'dva';
-import { Table, Pagination, Popover, Checkbox, Radio, Button, Icon } from 'antd';
+import { Table } from 'antd';
 import router from 'umi/router';
 import moment from 'moment';
 import Page from '../Page';

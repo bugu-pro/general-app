@@ -1,9 +1,8 @@
+/* eslint-disable */
 import React, {Component} from 'react';
 import {connect} from 'dva';
 import {router} from 'umi';
-import Link from 'umi/navlink';
-import {FormInstance} from 'antd/lib/form';
-import {Form, Input, Spin, Button, Icon, Checkbox, message} from 'antd';
+import {Form, Input, Spin, Button, Checkbox} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {Authenticate as namespace, } from '../../utils/namespace';
 import Particles from '../../components/Particles';
@@ -106,9 +105,8 @@ class MobilepswdLogin extends Component {
   }
 
   render() {
-    const {dispatch} = this.props;
     let {from} = this.props.location.state || {from: {pathname: "/"}};
-    let {redirectToReferrer, codeMode} = this.state;
+    let {redirectToReferrer} = this.state;
     if (redirectToReferrer) {
       console.log('Redirect -----> 手机号+密码登录成功，应该跳转', from);
       return <Redirect to={from} />;
@@ -149,7 +147,7 @@ class MobilepswdLogin extends Component {
           margin: '-8px 0 12px 45px',
           justifyContent: 'space-between',
         }}>
-          <Checkbox onChange={this.onCheckboxChange} defaultChecked={localStorage && localStorage.getItem('rememberMe') == 1 ? true : false}>记住密码</Checkbox>
+          <Checkbox onChange={this.onCheckboxChange} defaultChecked={localStorage && localStorage.getItem('rememberMe') * 1 === 1 ? true : false}>记住密码</Checkbox>
           {/* <Link to='/reset-pswd'>忘记密码</Link> */}
           {/* <a onClick={() => this.setState({codeMode: !codeMode})}>{codeMode ? '密码登录' : '验证码登录'}</a> */}
         </p>

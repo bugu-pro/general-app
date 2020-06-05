@@ -5,7 +5,7 @@ import { Icon, Spin, Menu, Popover, ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import classNames from 'classnames';
 import Flex from '../components/Flex';
-import { Authenticate as namespace, AnswerEditor, Env, ExaminerV2 } from '../utils/namespace';
+import { Authenticate as namespace } from '../utils/namespace';
 import styles from './index.less';
 import { addClass, removeClass } from '../utils/dom';
 import { Redirect } from 'react-router';
@@ -84,12 +84,11 @@ const UserSide = connect(state => ({
   menuTree: state[namespace].menuTree,
   resources: state[namespace].resources,
   loading: state.loading.models[namespace],
-  env: state[Env],
 }))(
   function Side(props) {
 
     const {
-      env, profile, loading, dispatch, location, menuTree = [],
+      profile, loading, dispatch, location, menuTree = [],
     } = props;
 
     const [isMin, setIsMin] = useState(true);
@@ -170,7 +169,7 @@ const UserSide = connect(state => ({
             </Spin>
           </Flex.Item>
           {
-            env.inElectron && profile ?
+            profile ?
               <SideFooter profile={profile} dispatch={dispatch}/>
               :
               null
@@ -195,7 +194,7 @@ const AppLayout = withRouter(function AppLayout({ children, ...props }) {
 
 function BaseLayout({ location, children, ...props }) {
   const { pathname } = location;
-  const notLayoutUrlList = ['/login', '/reset-password', AnswerEditor + '/editor', ExaminerV2 + '/editor'];
+  const notLayoutUrlList = ['/login', '/reset-password'];
   if (notLayoutUrlList.indexOf(pathname) >= 0) {
     return children;
   }
@@ -206,7 +205,7 @@ function BaseLayout({ location, children, ...props }) {
 
 const PrivateRoute = ({ children, location, profile }) => {
   return (
-    profile && profile.token ?
+    !profile || profile.token ?
       children
       :
       <Redirect

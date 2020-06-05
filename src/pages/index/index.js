@@ -12,11 +12,11 @@ export default connect(state => ({
   menuTree: state[Authenticate].menuTree,
   profile: state[Authenticate].authenticate || {},
   loading: state.loading.global,
-})(function Home({loading, location, form, dispatch, profile, menuTree}) {
+})(function Home({loading, dispatch, profile, menuTree}) {
 
   const breadcrumb = ['首页'];
 
-  const {schoolCampusName = '数据加载中...', pswd} = profile || {};
+  const {schoolCampusName = '数据加载中...'} = profile || {};
 
   const title = schoolCampusName;
   const headerOperation = <Page.Header.Operation dispatch={dispatch} />;
@@ -47,6 +47,7 @@ export default connect(state => ({
           {
             menuList && menuList.length ?
               menuList.map(it =>
+                // eslint-disable-next-line
                 <a key={it.id || it.link} onClick={() => {
                   router.push(it.link);
                 }}>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'dva';
-import { Button, Icon, Popconfirm, Popover, Tooltip, Menu, Modal, Cascader } from 'antd';
+import { Button, Icon, Popconfirm, Popover, Tooltip, Modal, Cascader } from 'antd';
 import { Authenticate } from '../../utils/namespace';
 import { router, Link } from 'umi';
 import './index.less';
@@ -170,7 +170,7 @@ class HeaderOperation extends Component {
           <div style={{ flex: 1 }}>
             {
               ((schoolCampusList && schoolCampusList.length > 1) || (campusList && campusList.length > 1)) ?
-                <a onClick={() => {
+                <a href="/" onClick={() => {
                   let selectedSchoolCampusIds;
                   const selectModal = Modal.confirm({
                     icon: null,
@@ -232,7 +232,7 @@ class HeaderOperation extends Component {
                 null
             }
           </div>
-          <a onClick={handleExit}>退出</a>
+          <a href="/" onClick={handleExit}>退出</a>
         </li>
       </ul>
     ) : null;
