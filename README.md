@@ -9,8 +9,8 @@ bugu-cli使用模板(管理后台)
 #### 安装教程
 
 1.  mkdir general-app && cd general-app
-2.  npm install bugu-cli -g 
-3.  bugu-cli
+2.  npm install -g create-bugu
+3.  create-bugu
 
 #### 使用说明
 

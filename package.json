@@ -27,7 +27,6 @@
   "create-bugu": {
     "ignore": [
       ".git",
-      "create-umi"
     ]
   },
   "lint-staged": {
