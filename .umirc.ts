@@ -1,32 +1,14 @@
-import { IConfig } from 'umi-types';
+import { defineConfig } from 'umi';
 
-// ref: https://umijs.org/config/
-const config: IConfig =  {
-  treeShaking: true,
-  plugins: [
-    // ref: https://umijs.org/plugin/umi-plugin-react.html
-    ['umi-plugin-react', {
-      antd: true,
-      dva: true,
-      dynamicImport: { webpackChunkName: true },
-      title: 'bugu',
-      dll: true,
-      hd: true,
-      fastClick: true,
-
-      routes: {
-        exclude: [
-          /models\//,
-          /utils\//,
-          /caches\//,
-          /services\//,
-          /model\.(t|j)sx?$/,
-          /service\.(t|j)sx?$/,
-          /components\//,
-        ],
-      },
-    }],
-  ],
+export default defineConfig({
+  title: 'bugu',
+  antd: {},
+  dva: {
+    skipModelValidate: true,
+  },
+  dynamicImport: {
+    loading: '@/Loading',
+  },
   hash: true,
   targets: {
     ios: '8.4',
@@ -41,6 +23,4 @@ const config: IConfig =  {
   theme: {
     '@primary-color': '#1DA57A',
   },
-}
-
-export default config;
+});

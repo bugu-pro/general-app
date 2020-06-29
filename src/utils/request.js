@@ -1,8 +1,7 @@
 import fetch from 'dva/fetch';
 import QueryString from 'qs';
-import router from 'umi/router';
-import { localCache, sessionCache } from "../caches";
-
+import { history } from 'umi';
+import { localCache, sessionCache } from '../caches';
 
 const config = {};
 
@@ -15,7 +14,7 @@ export function get(key) {
 }
 
 function checkHttpStatus(url, opts) {
-  return (response) => {
+  return response => {
     if (response.status >= 200 && response.status < 300) {
       set('status', false);
       return response;
@@ -23,11 +22,11 @@ function checkHttpStatus(url, opts) {
     set('status', response.status);
     if (response.status === 401) {
       console.error({
-        '错误原因': '401登录超时或未授权',
-        '接口地址': url,
-        '请求参数': opts,
-        '接口返回': response,
-      })
+        错误原因: '401登录超时或未授权',
+        接口地址: url,
+        请求参数: opts,
+        接口返回: response,
+      });
       // 登录超时的种情况不是太常见， 后台有效期28天， 前端缓存7天， 7天后自动刷新了，
       // 使用关闭窗口，有个好处，重新进入系统的时候 历史记录是正确的，
       // 如果是重新刷新Token，需要从微信那边拿到code 这样在浏览器历史记录中会有一个微信认证地址， 真的很麻烦
@@ -38,23 +37,23 @@ function checkHttpStatus(url, opts) {
 
     if (response.status === 403) {
       console.error({
-        '错误原因': '403用户无权限',
-        '接口地址': url,
-        '请求参数': opts,
-        '接口返回': response,
-      })
-      router.replace('/403');
+        错误原因: '403用户无权限',
+        接口地址: url,
+        请求参数: opts,
+        接口返回: response,
+      });
+      history.replace('/403');
     }
 
     const error = new Error(response.statusText);
     error.response = response;
     error.code = response.status;
     throw error;
-  }
+  };
 }
 
 function getResult(url, opts) {
-  return (json) => {
+  return json => {
     if (json.status === 1) {
       return { result: json.result };
     }
@@ -62,13 +61,13 @@ function getResult(url, opts) {
     error.code = json.code;
     error.data = json;
     console.error({
-      '错误原因': '调用接口出错',
-      '接口地址': url,
-      '请求参数': opts,
-      '接口返回': error,
-    })
+      错误原因: '调用接口出错',
+      接口地址: url,
+      请求参数: opts,
+      接口返回: error,
+    });
     throw error;
-  }
+  };
 }
 
 export default function request(url = '', options = {}, cache) {
