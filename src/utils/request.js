@@ -1,6 +1,6 @@
 import fetch from 'dva/fetch';
 import QueryString from 'qs';
-import router from 'umi/router';
+import {history} from 'umi';
 import { localCache, sessionCache } from "../caches";
 
 
@@ -43,7 +43,7 @@ function checkHttpStatus(url, opts) {
         '请求参数': opts,
         '接口返回': response,
       })
-      router.replace('/403');
+      history.replace('/403');
     }
 
     const error = new Error(response.statusText);

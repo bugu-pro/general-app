@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Table } from 'antd';
-import router from 'umi/router';
+import {Table} from 'antd';
+import {history} from 'umi';
 import moment from 'moment';
 import Page from '../Page';
 import PageHeaderOperation from '../Page/HeaderOperation';
@@ -68,8 +68,8 @@ export function buildHandleTableChange({
   onChange, location
 }) {
   return (pagination, filters, sorter) => {
-    const { query, pathname } = location;
-    let _query = { ...query };
+    const {query, pathname} = location;
+    let _query = {...query};
     Object.keys(filters).forEach(key => {
       if (filters[key] && filters[key].length) {
         _query[key] = filters[key].join(',');
@@ -82,7 +82,7 @@ export function buildHandleTableChange({
       _query.s = pagination.pageSize;
     }
     const __query = onChange && onChange(pagination, filters, sorter) || {};
-    router.replace({ pathname, query: { ..._query, ...__query } });
+    history.replace({pathname, query: {..._query, ...__query}});
   }
 };
 
@@ -127,7 +127,7 @@ export default class ListPage extends Component {
       className,
       footer
     } = this.props;
-    const { query } = location;
+    const {query} = location;
     const headerOperation = <PageHeaderOperation dispatch={dispatch} buttons={operations} />;
     const header = (
       <Page.Header breadcrumb={breadcrumb} title={title} operation={headerOperation}>
@@ -156,7 +156,7 @@ export default class ListPage extends Component {
                     dataSource={Array.isArray(list) ? list : []}
                     pagination={pagination ? paginationConfig(query, total) : false}
                     onChange={handleTableChange}
-                    scroll={{ y: window.innerHeight - (pagination ? scrollHeight : (scrollHeight || 105)) }}
+                    scroll={{y: window.innerHeight - (pagination ? scrollHeight : (scrollHeight || 105))}}
                     rowClassName={rowClassName}
                     rowKey={rowKey}
                     rowSelection={rowSelection}

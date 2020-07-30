@@ -1,5 +1,5 @@
 import React, { Component, Fragment, useState, useEffect } from 'react';
-import { withRouter, Link, router } from 'umi';
+import { withRouter, Link, history } from 'umi';
 import { connect } from 'dva';
 import { Redirect } from 'react-router';
 import { BarsOutlined } from '@ant-design/icons';
@@ -25,7 +25,7 @@ function MenuItemContent({ menu }) {
   const { link, title, onClick } = menu;
   const _onClick = onClick || (() => {
     // debugger
-    router.push(link);
+    history.push(link);
   });
   return (
     <a onClick={_onClick}>

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, {Component} from 'react';
 import {connect} from 'dva';
-import {router} from 'umi';
+import {history} from 'umi';
 import { Input, Spin, Button, Checkbox, Form } from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {Authenticate as namespace, } from '../../utils/namespace';
@@ -85,7 +85,7 @@ class MobilepswdLogin extends Component {
         payload,
       }).then(res => {
         if (res && res.token) {
-          router.replace('/');
+          history.replace('/');
         }
       });
     }).catch((errors) => {

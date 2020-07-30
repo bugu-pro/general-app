@@ -4,7 +4,6 @@ import Page from '../../components/Page';
 import styles from './index.less';
 import {Authenticate} from '../../utils/namespace';
 // import authenticateCache from '../../caches/authenticate';
-import {router} from 'umi';
 import moment from 'moment';
 
 

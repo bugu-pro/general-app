@@ -4,7 +4,7 @@ import { connect } from 'dva';
 // import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { Button, Popconfirm, Popover, Tooltip, Modal, Cascader } from 'antd';
 import { Authenticate } from '../../utils/namespace';
-import { router, Link } from 'umi';
+import { history, Link } from 'umi';
 import './index.less';
 
 @connect(state => ({
@@ -65,8 +65,7 @@ class HeaderOperation extends Component {
         icon: 'rollback',
         onClick: e => {
           e.preventDefault();
-          router.goBack();
-          // dispatch(routerRedux.goBack());
+          history.goBack();
         },
       },
       rollback: {
@@ -74,7 +73,7 @@ class HeaderOperation extends Component {
         icon: 'rollback',
         onClick: e => {
           e.preventDefault();
-          router.goBack();
+          history.goBack();
         },
       },
       add: {
