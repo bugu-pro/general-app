@@ -1,6 +1,7 @@
 import React, { Component, Fragment, useState, useEffect } from 'react';
 import { withRouter, Link, router } from 'umi';
 import { connect } from 'dva';
+import { Redirect } from 'react-router';
 import { BarsOutlined } from '@ant-design/icons';
 import { Spin, Menu, Popover, ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
@@ -9,7 +10,6 @@ import Flex from '../components/Flex';
 import { Authenticate as namespace } from '../utils/namespace';
 import styles from './index.less';
 import { addClass, removeClass } from '../utils/dom';
-import { Redirect } from 'react-router';
 
 
 const ICON_MAP = {
@@ -38,7 +38,7 @@ function SideHeader() {
   return (
     <header className={styles['side-header']}>
       <Link to="/">
-        <span>智慧校园</span>
+        <span>管理后台</span>
       </Link>
     </header>
   );
@@ -110,14 +110,7 @@ const UserSide = connect(state => ({
     return (
       <Fragment>
         <Flex direction="column"
-              className={classNames(styles['side'], { [styles['min-side']]: isMin })}
-              onTransitionEnd={(e) => {
-                if (e.propertyName === 'width') {
-                  const event = document.createEvent('HTMLEvents');
-                  event.initEvent('resize', true, true);
-                  window.dispatchEvent(event);
-                }
-              }}>
+              className={classNames(styles['side'], { [styles['min-side']]: isMin })}>
           <SideHeader/>
           <Flex.Item className={styles['side-main']}>
             <Bars isMin={isMin} onChange={setIsMin}/>
@@ -136,7 +129,7 @@ const UserSide = connect(state => ({
                         key={submenu.key}
                         title={
                           <span
-                            className={classNames(styles['menu-submenu'], ICON_MAP[submenu.title])}>{submenu.title}</span>
+                            className={classNames(styles['menu-submenu'])}>{submenu.title}</span>
                         }
                       >
                         {

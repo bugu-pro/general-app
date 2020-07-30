@@ -12,7 +12,7 @@ function Home({loading, dispatch, profile, menuTree}) {
 
   const breadcrumb = ['首页'];
 
-  const {schoolCampusName = '欢迎来到布谷后台管理系统'} = profile || {};
+  const {schoolCampusName = '欢迎来到后台管理系统'} = profile || {};
 
   const title = schoolCampusName;
   const headerOperation = <Page.Header.Operation dispatch={dispatch} />;
@@ -35,28 +35,7 @@ function Home({loading, dispatch, profile, menuTree}) {
 
       <div className={styles['welcome']}>
         <h3>今日，</h3>
-        <p>{`${moment().format('YYYY年MM月DD日dddda')}，欢迎您使用布谷智慧校园控制台。`}</p>
-      </div>
-      <div className={styles['page-nav-list']}>
-        <h3>已开通产品</h3>
-        <nav>
-          {
-            menuList && menuList.length ?
-              menuList.map(it =>
-                // eslint-disable-next-line
-                <a key={it.id || it.link} onClick={() => {
-                  router.push(it.link);
-                }}>
-                  <i className={styles['icon']}>{it.title.charAt(0)}</i>
-                  {`${it.title} ${(it.controllerName || '').replace(/admin|Resource/g, '').replace(/^\w/, (a) => {
-                    return a.toUpperCase();
-                  })}`}
-                </a>
-              )
-              :
-              null
-          }
-        </nav>
+        <p>{`${moment().format('YYYY年MM月DD日dddd')}，欢迎您使用后台管理系统。`}</p>
       </div>
     </Page>
 
