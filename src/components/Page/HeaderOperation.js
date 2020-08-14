@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'dva';
-// import { Icon as LegacyIcon } from '@ant-design/compatible';
-import { Button, Popconfirm, Popover, Tooltip, Modal, Cascader } from 'antd';
-import { Authenticate } from '../../utils/namespace';
-import { history, Link } from 'umi';
+import {connect} from 'dva';
+import {UserOutlined} from '@ant-design/icons';
+import {Button, Popconfirm, Popover, Tooltip, Modal, Cascader} from 'antd';
+import {Authenticate} from '../../utils/namespace';
+import {history, Link} from 'umi';
 import './index.less';
 
 @connect(state => ({
@@ -16,9 +16,9 @@ class HeaderOperation extends Component {
     buttons: PropTypes.array,
   };
 
-  handelSwitchCampus = ({ item, key }) => {
-    const { profile, dispatch } = this.props;
-    const { currentSchool, currentCampus } = profile || {};
+  handelSwitchCampus = ({item, key}) => {
+    const {profile, dispatch} = this.props;
+    const {currentSchool, currentCampus} = profile || {};
     const campusList = currentSchool && currentSchool.campusList || null;
 
     const targetCampus = campusList && campusList.find(it => it.id === key * 1) || {};
@@ -43,7 +43,7 @@ class HeaderOperation extends Component {
   };
 
   render() {
-    const { profile, buttons = [], children, dispatch } = this.props;
+    const {profile = {}, buttons = [], children, dispatch} = this.props;
     const defaultButtons = {
       edit: {
         title: '编辑',
@@ -102,7 +102,7 @@ class HeaderOperation extends Component {
       buttons && buttons.length ? (
         <Button.Group className={'page-header-right-operations'}>
           {buttons.map(button => {
-            const props = { ...defaultButtons[button.key], ...button };
+            const props = {...defaultButtons[button.key], ...button};
             const title = props.title;
             const onConfirm = props.onConfirm;
             const confirm = props.confirm;
@@ -141,8 +141,8 @@ class HeaderOperation extends Component {
                 {btn}
               </Popconfirm>
             ) : (
-              btn
-            );
+                btn
+              );
           })}
         </Button.Group>
       ) : null;
@@ -154,103 +154,15 @@ class HeaderOperation extends Component {
       });
     };
 
-
-    const { schoolCampusList, currentSchool, schoolCampusName, schoolId, campusId } = profile || {};
-    const campusList = currentSchool && currentSchool.campusList || null;
-
-    const userOperations = profile ? (
-      <ul>
-        {
-          schoolCampusName ?
-            <li style={{ marginBottom: '5px' }}>{schoolCampusName}</li>
-            :
-            null
-        }
-        <li style={{ display: 'flex' }}>
-          <div style={{ flex: 1 }}>
-            {
-              ((schoolCampusList && schoolCampusList.length > 1) || (campusList && campusList.length > 1)) ?
-                <a href="/" onClick={() => {
-                  let selectedSchoolCampusIds;
-                  const selectModal = Modal.confirm({
-                    // icon: <LegacyIcon type={null} />,
-                    title: `切换${(schoolCampusList && schoolCampusList.length > 1) ? '学校' : '校区'}`,
-                    content: (
-                      <div style={{ padding: '10px 0' }}>
-                        <Cascader
-                          placeholder="请依次选择学校及校区"
-                          defaultValue={[schoolId, campusId]}
-                          style={{ width: '100%' }}
-                          options={schoolCampusList.map(it => ({
-                            value: it.id,
-                            label: it.name,
-                            children: it.campusList && it.campusList.length ?
-                              it.campusList.map(campus => ({
-                                value: campus.id,
-                                label: campus.name,
-                              }))
-                              :
-                              null,
-                          }))}
-                          onChange={(value) => {
-                            selectedSchoolCampusIds = value;
-                          }}
-                        />
-                      </div>
-                    ),
-                    cancelText: '取消',
-                    okText: '确定',
-                    onOk: () => {
-                      if (selectedSchoolCampusIds && selectedSchoolCampusIds.length === 2) {
-                        if (selectedSchoolCampusIds[1] !== campusId) {
-                          selectModal.destroy();
-
-                          const targetSchool = schoolCampusList.find(it => it.id === selectedSchoolCampusIds[0]);
-                          const targetCampus = targetSchool && targetSchool.campusList.find(it => it.id === selectedSchoolCampusIds[1]);
-
-                          Modal.confirm({
-                            title: `确定切换到${[targetSchool.name, targetCampus.name].join(' - ')}？`,
-                            content: window.location.pathname !== '/' ? '并将跳转至首页' : null,
-                            okText: '确定',
-                            cancelText: '取消',
-                            onOk() {
-                              dispatch({type: 'RESET'});
-                              dispatch({
-                                type: Authenticate + '/switchCampus',
-                                payload: {
-                                  id: selectedSchoolCampusIds[1],
-                                },
-                              });
-                            },
-                          });
-                        }
-                      }
-                    },
-                  });
-                }}>切换{(schoolCampusList && schoolCampusList.length > 1) ? '学校' : '校区'}</a>
-                :
-                null
-            }
-          </div>
-          <a href="/" onClick={handleExit}>退出</a>
-        </li>
-      </ul>
-    ) : null;
-
     return (
       <div className="page-header-right">
         {operations}
         {children}
-        {
-          userOperations ?
-            <Popover placement="leftTop" title={`用户：${profile.nick || profile.username}`} content={userOperations}>
-              <Button type="ghost" shape="circle" style={{ marginLeft: '1em', border: 'none' }}>
-                {/* <LegacyIcon type={'user'} style={{ fontSize: '32px', color: '#0088ff' }}/> */}
-              </Button>
-            </Popover>
-            :
-            null
-        }
+        <Popover placement="leftTop" title={`用户：${profile.nick || profile.username || 'admin'}`}>
+          <Button type="ghost" shape="circle" style={{marginLeft: '1em', border: 'none'}}>
+            <UserOutlined style={{fontSize: '32px', color: '#0088ff'}} />
+          </Button>
+        </Popover>
       </div>
     );
   }

@@ -1,11 +1,11 @@
 import React, { Component, Fragment, useState, useEffect } from 'react';
 import { withRouter, Link, history } from 'umi';
-import { connect } from 'dva';
 import { Redirect } from 'react-router';
-import { BarsOutlined } from '@ant-design/icons';
-import { Spin, Menu, Popover, ConfigProvider } from 'antd';
 import zhCN from 'antd/es/locale/zh_CN';
 import classNames from 'classnames';
+import { connect } from 'dva';
+import { BarsOutlined, UserOutlined } from '@ant-design/icons';
+import { Spin, Menu, Popover, ConfigProvider } from 'antd';
 import Flex from '../components/Flex';
 import { Authenticate as namespace } from '../utils/namespace';
 import styles from './index.less';
@@ -54,34 +54,14 @@ function Bars({ onChange, isMin }) {
   );
 }
 
-function SideFooter({ profile, dispatch }) {
-  return (
-    <footer className={styles['side-footer']}>
-      <Popover placement="rightBottom" title={`用户：${profile.nick || profile.username}`} content={
-        <ul>
-          <li>
-            <a onClick={() => {
-              dispatch({ type: namespace + '/logout' });
-            }}>退出</a>
-          </li>
-        </ul>
-      }>
-        <a className={styles['user-menu']}>{profile.nick}</a>
-      </Popover>
-    </footer>
-  );
-}
-
-
 const UserSide = connect(state => ({
-  menuTree: state[namespace].menuTree,
   resources: state[namespace].resources,
   loading: state.loading.models[namespace],
 }))(
   function Side(props) {
 
     const {
-      profile, loading, dispatch, location, menuTree = [],
+      profile, loading, dispatch, location,
     } = props;
 
     const [isMin, setIsMin] = useState(true);
@@ -106,18 +86,34 @@ const UserSide = connect(state => ({
 
     const [openKeys, setOpenKeys] = useState([]);
 
+    const menuTree = [{
+      key: 'manage',
+      title: '用户管理',
+      icon: <UserOutlined />,
+      children: [{
+        key: 'list',
+        title: '用户列表',
+        link: '/'
+      }, {
+        key: 'visitor',
+        title: '访客列表',
+        link: '/visitor'
+      }]
+    }];
 
     return (
       <Fragment>
         <Flex direction="column"
-              className={classNames(styles['side'], { [styles['min-side']]: isMin })}>
-          <SideHeader/>
+          className={classNames(styles['side'], { [styles['min-side']]: isMin })}>
+          <SideHeader />
           <Flex.Item className={styles['side-main']}>
-            <Bars isMin={isMin} onChange={setIsMin}/>
+            <Bars isMin={isMin} onChange={setIsMin} />
             <Spin spinning={!!loading}>
               {
                 <Menu
-                  mode={isMin ? 'vertical' : 'inline'}
+                  theme="dark"
+                  mode={'inline'}
+                  inlineCollapsed={!!isMin}
                   defaultOpenKeys={[defaultOpenKeys]}
                   defaultSelectedKeys={[pathname]}
                   onOpenChange={openKeys => setOpenKeys(openKeys.length ? [openKeys.pop()] : [])}
@@ -127,26 +123,15 @@ const UserSide = connect(state => ({
                     menuTree && menuTree.map(submenu => (
                       <Menu.SubMenu
                         key={submenu.key}
-                        title={
-                          <span
-                            className={classNames(styles['menu-submenu'])}>{submenu.title}</span>
-                        }
+                        icon={submenu.icon}
+                        title={<span>{submenu.title}</span>}
                       >
                         {
-                          submenu.items.map((menus, mi) =>
-                            <Menu.ItemGroup
-                              key={'menu-item-group-' + submenu.key + '-' + mi}
-                              title={menus.title}
-                            >
-                              {
-                                menus.items.map((item) => (
-                                  <Menu.Item key={item.link || item.key} id={item.link}>
-                                    <MenuItemContent menu={item} min={isMin} dispatch={dispatch}/>
-                                  </Menu.Item>
-                                ))
-                              }
-                            </Menu.ItemGroup>,
-                          )
+                          submenu.children.map((menu) => (
+                            <Menu.Item key={menu.link || menu.key}>
+                              <MenuItemContent menu={menu} min={isMin} dispatch={dispatch} />
+                            </Menu.Item>
+                          ))
                         }
                       </Menu.SubMenu>
                     ))}
@@ -154,12 +139,6 @@ const UserSide = connect(state => ({
               }
             </Spin>
           </Flex.Item>
-          {
-            profile ?
-              <SideFooter profile={profile} dispatch={dispatch}/>
-              :
-              null
-          }
         </Flex>
       </Fragment>
     );
@@ -170,7 +149,7 @@ const UserSide = connect(state => ({
 const AppLayout = withRouter(function AppLayout({ children, ...props }) {
   return (
     <div className={styles['layout']}>
-      <UserSide {...props}  />
+      <UserSide {...props} />
       <div className={styles['main']}>
         {children}
       </div>
@@ -251,9 +230,9 @@ const App = connect(state => ({
       <ConfigProvider locale={zhCN}>
         <ErrorBoundary {...props}>
           <CheckProfile {...props}>
-            <BaseLayout {...props}>
-              {children}
-            </BaseLayout>
+          <BaseLayout {...props}>
+            {children}
+          </BaseLayout>
           </CheckProfile>
         </ErrorBoundary>
       </ConfigProvider>

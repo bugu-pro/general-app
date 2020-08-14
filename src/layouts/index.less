@@ -61,89 +61,6 @@
   color: #eee;
   background-color: #001529;
   transition: width 0.3s;
-  //box-shadow: 0 0 10px #000;
-
-  :global {
-    .ant-menu-vertical .ant-menu-item,
-    .ant-menu-inline .ant-menu-item,
-    .ant-menu-vertical .ant-menu-submenu-title,
-    .ant-menu-inline .ant-menu-submenu-title {
-      height: 40px;
-      line-height: 40px;
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-
-    .ant-menu {
-      color: #fff;
-      background: rgba(255, 255, 255, .05);
-    }
-
-    .ant-menu-item > a {
-      color: #fff;
-    }
-
-    .ant-menu-item-group-title {
-      color: #aaa;
-    }
-
-    .ant-menu-inline,
-    .ant-menu-vertical {
-      border-right: 0;
-    }
-
-    .ant-menu-item:hover,
-    .ant-menu-item-active,
-    .ant-menu-submenu-active,
-    .ant-menu-submenu-title:hover {
-      color: #fff;
-      background-color: @primary-color * 0.75;
-    }
-
-    .ant-menu-inline {
-      .ant-menu-selected,
-      .ant-menu-item-selected {
-        border-right: 0;
-        background-color: @primary-color;
-      }
-    }
-
-    .ant-menu-inline .ant-menu-item,
-    .ant-menu-vertical .ant-menu-item {
-      border-right: 0;
-      margin-left: 0;
-      left: 0;
-    }
-
-    .ant-menu-item:hover,
-    .ant-menu-item-active,
-    .ant-menu-submenu-active,
-    .ant-menu-submenu-title {
-      &:hover {
-        color: #fff;
-      }
-
-      .ant-menu-submenu-title-div {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-      }
-    }
-
-    .ant-menu-item-group-title {
-      display: none;
-      //padding-left: 32px !important;
-    }
-  }
-
-  .menu-submenu {
-    background-repeat: no-repeat;
-    background-size: 16px;
-    background-position: left center;
-    padding-left: 24px;
-    display: block;
-  }
 
   &.min-side {
 
@@ -161,75 +78,6 @@
       :global {
         .anticon-bars {
           transform: rotate(90deg);
-        }
-      }
-    }
-
-    .menu-submenu {
-
-      background-size: 24px;
-      background-position: center center;
-      padding-left: 24px;
-      text-indent: -9999px;
-    }
-
-
-    :global {
-
-      .ant-menu-vertical .ant-menu-item {
-        height: 36px;
-        line-height: 36px;
-        margin-top: 0;
-        margin-bottom: 0;
-      }
-
-      .ant-menu-vertical .ant-menu-item,
-      .ant-menu-inline .ant-menu-item,
-      .ant-menu-vertical .ant-menu-submenu-title,
-      .ant-menu-inline .ant-menu-submenu-title {
-        height: 50px;
-        line-height: 50px;
-        margin-top: 0;
-        margin-bottom: 0;
-      }
-
-      .ant-menu-submenu-title {
-        & > .ant-menu-submenu-arrow {
-          display: none; // 小侧边栏模式下子菜单的arrow隐藏
-        }
-      }
-
-      .ant-menu-item-group-title {
-        display: none;
-      }
-
-      .ant-menu-submenu-inline > .ant-menu-submenu-title {
-        &:after {
-          right: auto;
-          font-size: 14px;
-        }
-
-        .ant-menu-submenu-title-div {
-
-          left: 0;
-
-        }
-      }
-
-      .ant-menu-inline .ant-menu-item,
-      .ant-menu-vertical .ant-menu-item {
-        padding: 0 !important;
-        text-align: center;
-
-      }
-
-      .ant-menu-item-group-list {
-        .ant-menu-item {
-          a {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-          }
         }
       }
     }
@@ -458,7 +306,7 @@
     -webkit-app-region: drag;
 
     &.min-side {
-      width: 60px;
+      width: 80px;
     }
   }
 
@@ -504,31 +352,6 @@
 
 :global {
   .side-small {
-    .ant-menu-submenu {
-      &.ant-menu-submenu-selected{
-        background-color: @primary-color;
-      }
-      &.ant-menu-submenu-popup {
-        .ant-menu {
-          &.ant-menu-sub {
-            &.ant-menu-vertical {
-              .ant-menu-item-group{
-                .ant-menu-item-group-title{
-                  display: none;
-                }
-                .ant-menu-item {
-                  height: 36px;
-                  line-height: 36px;
-                  margin-top: 0;
-                  margin-bottom: 0;
-                }
-              }
-
-            }
-          }
-        }
-      }
-    }
   }
 }
 
