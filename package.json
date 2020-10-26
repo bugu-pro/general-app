@@ -19,18 +19,19 @@
     ]
   },
   "dependencies": {
-    "umi": "^3.2.6",
+    "@alitajs/hd": "^2.5.14",
     "@ant-design/pro-layout": "^5.0.12",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.2.6",
-    "lint-staged": "^10.0.7",
-    "prettier": "^1.19.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "yorkie": "^2.0.0",
     "classnames": "^2.2.6",
     "dva-model": "^2.4.1",
-    "qs": "^6.9.4"
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1",
+    "qs": "^6.9.4",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "umi": "^3.2.6",
+    "yorkie": "^2.0.0"
   },
   "create-bugu": {
     "ignore": [

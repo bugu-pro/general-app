@@ -9,6 +9,23 @@ export default defineConfig({
   dynamicImport: {
     loading: '@/Loading',
   },
+  plugins: ['@alitajs/hd'],
+  hd: {
+    // same as config.theme, default set @hd: 2px
+    theme: {},
+    px2rem: {
+      rootValue: 100,
+      unitPrecision: 5,
+      propWhiteList: [],
+      propBlackList: [],
+      exclude: false,
+      selectorBlackList: [],
+      ignoreIdentifier: false,
+      replace: true,
+      mediaQuery: false,
+      minPixelValue: 0,
+    },
+  },
   hash: true,
   targets: {
     ios: '8.4',
