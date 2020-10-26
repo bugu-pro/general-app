@@ -40,4 +40,28 @@ export default defineConfig({
   theme: {
     '@primary-color': '#1DA57A',
   },
+  // 页面过多，文件资源较大但情况下开启动态加载
+  // chunks: ['vendors', 'umi'],
+  // chainWebpack: function (config, { webpack }) {
+  //   config.merge({
+  //     optimization: {
+  //       minimize: true,
+  //       splitChunks: {
+  //         chunks: 'all',
+  //         minSize: 30000,
+  //         minChunks: 3,
+  //         automaticNameDelimiter: '.',
+  //         cacheGroups: {
+  //           vendor: {
+  //             name: 'vendors',
+  //             test({ resource }) {
+  //               return /[\\/]node_modules[\\/]/.test(resource);
+  //             },
+  //             priority: 10,
+  //           },
+  //         },
+  //       },
+  //     }
+  //   });
+  // },
 });
