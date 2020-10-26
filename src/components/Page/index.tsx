@@ -31,14 +31,6 @@ export default class Page extends Component<PageProps>{
     mainDirection:'column',
   };
 
-  componentDidMount(): void {
-    window['TDAPP'] && window['TDAPP'].onEvent('page', 'mount', {url: window.location.href, title: document.title});
-  }
-
-  componentWillUnmount(): void {
-    window['TDAPP'] && window['TDAPP'].onEvent('page', 'unmount', {url: window.location.href, title: document.title});
-  }
-
   render(){
     const {children, header, footer, loading, className, style, mainClassName, mainDirection} = this.props;
     return (
