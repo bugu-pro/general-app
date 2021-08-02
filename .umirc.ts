@@ -6,7 +6,9 @@ export default defineConfig({
   dva: {
     skipModelValidate: true
   },
-  mfsu: {},
+  mfsu: {
+    production: {}
+  },
   fastRefresh: {},
   nodeModulesTransform: {
     type: 'none', //不编译npm库的代码，提升编译速度
