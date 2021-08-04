@@ -1,4 +1,4 @@
-import React, {Component, FunctionComponent} from 'react';
+import {Component, FunctionComponent} from 'react';
 import { HeartOutlined } from '@ant-design/icons';
 // import { Icon as LegacyIcon } from '@ant-design/compatible';
 import { Breadcrumb, Spin, Menu, Modal } from 'antd';
